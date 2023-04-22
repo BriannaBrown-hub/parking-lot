@@ -31,6 +31,7 @@ class SpotSchema(ma.SQLAlchemyAutoSchema):
         model = Spot
         load_instance = True
         sqla_session = db.session
+        include_relationships = True
 
 spot_schema = SpotSchema()
 spots_schema = SpotSchema(many=True)

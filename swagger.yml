@@ -7,13 +7,43 @@ info:
 servers:
   - url: "/api"
 
+components:
+  schemas:
+    Spot:
+      type: "object"
+      required:
+        - spot_id
+      properties:
+        spot_id:
+          type: "integer"
+  parameters:
+    spot_id:
+      name: "spot_id"
+      description: "ID of the spot"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+
 paths:
-  /spot:
-    post:
-      operationId: "spot.seed"
+  /spots:
+    get:
+      operationId: "spot.get_all"
       tags:
         - "spot"
-      summary: "If the parking lot has not been created, this will creating parking spots"
+      summary: "Get a list of all parking spots and vehicles parked"
       responses:
         "200":
-          description: "spot.seed"
+          description: "successfully all returns spots"
+
+  /spot/{spot_id}:
+    get:
+      operationId: "spot.get_spot"
+      tags:
+        - "spot"
+      summary: "Read one spot"
+      parameters:
+        - $ref: "#/components/parameters/spot_id"
+      responses:
+        "200":
+          description: "successfully returns one spot"
