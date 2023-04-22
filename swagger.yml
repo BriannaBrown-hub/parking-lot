@@ -1,0 +1,19 @@
+openapi: 3.0.0
+info:
+  title: "Parking Lot Flask REST API"
+  description: "An API for managing the parking lot"
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+paths:
+  /spot:
+    post:
+      operationId: "spot.seed"
+      tags:
+        - "spot"
+      summary: "If the parking lot has not been created, this will creating parking spots"
+      responses:
+        "200":
+          description: "spot.seed"
