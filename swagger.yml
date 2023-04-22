@@ -8,14 +8,6 @@ servers:
   - url: "/api"
 
 components:
-  schemas:
-    Spot:
-      type: "object"
-      required:
-        - spot_id
-      properties:
-        spot_id:
-          type: "integer"
   parameters:
     spot_id:
       name: "spot_id"
@@ -24,6 +16,21 @@ components:
       required: true
       schema:
         type: "integer"
+    vehicle_id:
+      name: "vehicle_id"
+      description: "ID of the vehicle"
+      in: path
+      required: true
+      schema:
+        type: "integer"
+    vehicle_type:
+      name: "vehicle_type"
+      description: "type of vehicle to be parked"
+      in: path
+      required: true
+      schema:
+        type: "string"
+        enum: ["Van", "Car", "Motorcycle"]
 
 paths:
   /spots:
@@ -47,3 +54,36 @@ paths:
       responses:
         "200":
           description: "successfully returns one spot"
+
+  /lot-status:
+    get:
+      operationId: "spot.get_lot_status"
+      tags:
+        - "lot-status"
+      summary: "Get available spots"
+      responses:
+        "200":
+          description: "successfully returned lot status"
+
+  /park/{vehicle_type}:
+    post:
+      operationId: "park.park"
+      tags:
+        - "park"
+      summary: "Park a vehicle"
+      parameters:
+        - $ref: "#/components/parameters/vehicle_type"
+      responses:
+        "200":
+          description: "successfully parks one vehicle"
+  /unpark/{vehicle_id}:
+    delete:
+      operationId: "park.unpark"
+      tags:
+        - "park"
+      summary: "Remove a vehicle from the lot"
+      parameters:
+        - $ref: "#/components/parameters/vehicle_id"
+      responses:
+        "200":
+          description: "successfully deletes vehicle from lot"

@@ -4,43 +4,53 @@ from models import Spot
 SPOTS = [
     {
       "id": 1,
-      "type": "car"
+      "type": "car",
+      "vehicle_id": None
     },
     {
       "id": 2,
-      "type": "car"
+      "type": "car",
+      "vehicle_id": None
     },
     {
       "id": 3,
-      "type": "car"
+      "type": "car",
+      "vehicle_id": None
     },
     {
       "id": 4,
-      "type": "car"
+      "type": "car",
+      "vehicle_id": None
     },
     {
       "id": 5,
-      "type": "car"
+      "type": "car",
+      "vehicle_id": None
     },
     {
       "id": 6,
-      "type": "car"
+      "type": "car",
+      "vehicle_id": None
     },
     {
       "id": 7,
-      "type": "car"
+      "type": "car",
+      "vehicle_id": None
     },
     {
       "id": 8,
-      "type": "van"
+      "type": "van",
+      "vehicle_id": None
     },
     {
       "id": 9,
-      "type": "van"
+      "type": "van",
+      "vehicle_id": None
     },
     {
       "id": 10,
-      "type": "van"
+      "type": "van",
+      "vehicle_id": None
     }
 ]
 
