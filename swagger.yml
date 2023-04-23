@@ -64,6 +64,15 @@ paths:
       responses:
         "200":
           description: "successfully returned lot status"
+  /lot-status/vans:
+    get:
+      operationId: "spot.get_van_count"
+      tags:
+        - "lot-status"
+      summary: "Summary of spots occupied by vans"
+      responses:
+        "200":
+          description: "successfully returned count of vans"
 
   /park/{vehicle_type}:
     post:

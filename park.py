@@ -1,7 +1,7 @@
 
 from flask import make_response, abort
 from config import db
-from models import Vehicle, Spot, vehicle_schema
+from models import Vehicle, Spot
 
 def consecutive_car_spots(spot_ids):
   sort_spots = sorted(set(spot_ids))
