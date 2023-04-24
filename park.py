@@ -4,7 +4,7 @@ from models import Vehicle, Spot
 
 
 def consecutive_car_spots(spot_ids):
-    # first make sure the spots are sorted
+    # first make sure the spots are sorted in ascending order
     sorted_spots = sorted(set(spot_ids))
     # instantiate a sub list of consecutive spots with the first spot
     grouped = [[sorted_spots[0]]]
@@ -23,13 +23,16 @@ def consecutive_car_spots(spot_ids):
     return three_consecutive_spots[0][:3] if three_consecutive_spots != [] else []
 
 
-def park_van(available_spots):
+def park_van():
     available_van_spot = (
         Spot.query.filter(Spot.vehicle_id == None).filter(Spot.type == "van").first()
     )
 
     if available_van_spot is None:
-        available_spot_ids = list(map(lambda spot: spot.id, available_spots))
+        available_car_spots = Spot.query.filter(Spot.vehicle_id == None).filter(
+            Spot.type == "car"
+        )
+        available_spot_ids = list(map(lambda spot: spot.id, available_car_spots))
 
         consecutive_spots = consecutive_car_spots(available_spot_ids)
 
@@ -39,7 +42,7 @@ def park_van(available_spots):
     return (
         [available_van_spot]
         if available_van_spot is not None
-        else available_spots.filter(Spot.id.in_(consecutive_spots)).all()
+        else available_car_spots.filter(Spot.id.in_(consecutive_spots)).all()
     )
 
 
@@ -63,7 +66,7 @@ def park(vehicle_type):
         abort(404, f"There is no spot available atm")
 
     if vehicle_type == "Van":
-        spots = park_van(available_spots)
+        spots = park_van()
     elif vehicle_type == "Car":
         spots = park_car()
     else:
